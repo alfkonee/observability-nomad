@@ -24,7 +24,7 @@ job "loki" {
       driver = "docker"
 
       env {
-        JAEGER_AGENT_HOST    = "tempo.service.dc1.consul"
+        JAEGER_AGENT_HOST    = "tempo.service.consul"
         JAEGER_TAGS          = "cluster=nomad"
         JAEGER_SAMPLER_TYPE  = "probabilistic"
         JAEGER_SAMPLER_PARAM = "1"
