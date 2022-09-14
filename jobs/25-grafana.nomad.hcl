@@ -25,6 +25,7 @@ job "grafana" {
 
       config {
         image = "grafana/grafana:latest"
+
         ports = ["http"]
       }
 
@@ -32,7 +33,8 @@ job "grafana" {
         GF_LOG_LEVEL          = "DEBUG"
         GF_LOG_MODE           = "console"
         GF_SERVER_HTTP_PORT   = "${NOMAD_PORT_http}"
-        GF_PATHS_PROVISIONING = "/local/grafana/provisioning"
+        GF_PATHS_PROVISIONING = "/local/grafana/provisioning",
+        DB_PASSWORD           = "alf#NOMADPOSTGRES!2022"
       }
 
       template {
@@ -95,16 +97,15 @@ datasources:
 EOTC
         destination = "/local/grafana/provisioning/datasources/ds.yaml"
       }
-      template {
-        data  = <<ETOC
-
-ETOC
-        destination = "/local/grafana/config/custom.ini"
-      }
       artifact {
         source      = "https://raw.githubusercontent.com/alfkonee/observability-nomad/main/provisioning/dashboard.yaml"
         mode        = "file"
         destination = "/local/grafana/provisioning/dashboards/dashboard.yaml"
+      }
+      artifact {
+        source      = "https://raw.githubusercontent.com/alfkonee/observability-nomad/main/config/grafana.ini"
+        mode        = "file"
+        destination = "/etc/grafana/grafana.ini"
       }
       artifact {
         source      = "https://raw.githubusercontent.com/alfkonee/observability-nomad/main/provisioning/dashboard.json"
