@@ -33,8 +33,9 @@ job "grafana" {
         GF_LOG_LEVEL          = "DEBUG"
         GF_LOG_MODE           = "console"
         GF_SERVER_HTTP_PORT   = "${NOMAD_PORT_http}"
-        GF_PATHS_PROVISIONING = "/local/grafana/provisioning",
-        DB_PASSWORD           = "alf#NOMADPOSTGRES!2022"
+        GF_PATHS_PROVISIONING = "/local/grafana/provisioning"
+        GF_PATHS_CONFIG       = "/local/grafana/config/grafana.ini"
+        DB_PASSWORD           = "alf#GFUUASA!2022"
       }
 
       template {
@@ -105,7 +106,7 @@ EOTC
       artifact {
         source      = "https://raw.githubusercontent.com/alfkonee/observability-nomad/main/config/grafana.ini"
         mode        = "file"
-        destination = "/etc/grafana/grafana.ini"
+        destination = "/local/grafana/config/grafana.ini"
       }
       artifact {
         source      = "https://raw.githubusercontent.com/alfkonee/observability-nomad/main/provisioning/dashboard.json"
