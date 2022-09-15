@@ -28,13 +28,14 @@ schema_config:
 
 storage_config:
   aws:
-    s3: http://eW1MjDfe2J9jfZnh:dCbPdZbvQwhX6xS2lyab0qeoASZyUlBL@minio.service.consul.:9000/loki-bucket
+    s3: http://eW1MjDfe2J9jfZnh:dCbPdZbvQwhX6xS2lyab0qeoASZyUlBL@minio.service.consul.gh-elyfe-1:9000/loki-bucket
     s3forcepathstyle: true
   
   boltdb_shipper:
-    active_index_directory: /loki/index
+    active_index_directory: /loki/boltdb-shipper-active
+    cache_location: /loki/boltdb-shipper-cache
+    cache_ttl: 24h         # Can be increased for faster performance over longer query periods, uses more disk space
     shared_store: s3
-    cache_location: /loki/boltdb-cache
 
 ruler:
   alertmanager_url: http://localhost:9093
