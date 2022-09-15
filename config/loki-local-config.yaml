@@ -28,7 +28,7 @@ schema_config:
 
 storage_config:
   aws:
-    s3: http://eW1MjDfe2J9jfZnh:dCbPdZbvQwhX6xS2lyab0qeoASZyUlBL@minio.service.consul.gh-elyfe-1:9000/loki-bucket
+    s3: http://eW1MjDfe2J9jfZnh:dCbPdZbvQwhX6xS2lyab0qeoASZyUlBL@minio.service.consul.:9000/loki-bucket
     s3forcepathstyle: true
   
   boltdb_shipper:
