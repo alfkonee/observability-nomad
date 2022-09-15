@@ -35,13 +35,19 @@ job "loki" {
         ports = ["http"]
         args = [
           "-config.file",
-          "/etc/loki/local-config.yaml",
+          "/local/etc/loki/local-config.yaml",
         ]
       }
 
       resources {
         cpu    = 200
         memory = 200
+      }
+      
+      artifact {
+        source      = "https://raw.githubusercontent.com/alfkonee/observability-nomad/main/config/loki-local-config.yaml"
+        mode        = "file"
+        destination = "/local/etc/loki/local-config.yaml"
       }
 
       service {

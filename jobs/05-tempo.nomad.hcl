@@ -88,7 +88,14 @@ metrics_generator:
 
 storage:
   trace:
-    backend: local                     # backend configuration to use
+    backend: s3                     # backend configuration to use
+    s3:
+      bucket: tempo-bucket
+      endpoint: minio.service.consul:9000
+      insecure: true
+      access_key: AKIAIOSFODNN7EXAMPLE
+      secret_key: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+      tags: {'tempo', 'enabled' }
     block:
       bloom_filter_false_positive: .05 # bloom filter false positive rate.  lower values create larger filters but fewer false positives
       index_downsample_bytes: 1000     # number of bytes per index record

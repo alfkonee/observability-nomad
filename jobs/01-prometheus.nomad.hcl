@@ -29,10 +29,15 @@ job "prometheus" {
 global:
   scrape_interval: 15s
 scrape_configs:
+  - job_name: minio-job
+    metrics_path: /minio/v2/metrics/cluster
+    scheme: http
+    static_configs:
+    - targets: ['minio.service.consul:9000']
   - job_name: 'self'
     consul_sd_configs:
       - server: 'consul.service.consul:8500'
-        token: '[REPLACE_WITH_CONSUL_TOKEN]'
+        token: '6c8cd232-104d-0622-9899-64acd85119a7'
     relabel_configs:
       - source_labels: [__meta_consul_service_metadata_external_source]
         target_label: source
